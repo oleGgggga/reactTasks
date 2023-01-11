@@ -1,0 +1,22 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <title>Shop</title>
+  </head> 
+<body>
+    <div id="container"></div>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+    <script src="./components/Item.js"></script>
+    <script src="./components/Item_Block.js"></script>
+    <script>
+    let data=[{"id":1,"title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops","price":109.95,"image":"./img/1.jpg",},{"id":2,"title":"Mens Casual Premium Slim Fit T-Shirts ","price":22.3,"image":"./img/1.jpg",},{"id":3,"title":"Mens Cotton Jacket","price":55.99,"image":"./img/1.jpg",},{"id":4,"title":"Mens Casual Slim Fit","price":15.99,"image":"./img/1.jpg",},{"id":5,"title":"John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet","price":695,"image":"./img/1.jpg",},];
+    ReactDOM.render(
+        React.createElement(Item_Block,{data:data,},),
+        document.getElementById('container')
+    );
+    </script>
+</body>
+<link rel="stylesheet" href="./main.css">
+</html>
