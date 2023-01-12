@@ -1,7 +1,7 @@
 let Item_Block=React.createClass({
     displayName: 'Item_Block',
     propTypes:{
-        answers: React.PropTypes.array.isRequired,
+        data: React.PropTypes.array.isRequired,
     },
     render: function(){
         let itemData=this.props.data.map( elem=>React.createElement(Item, { key: elem.id, title:elem.title, price:elem.price, img:elem.image,}));
