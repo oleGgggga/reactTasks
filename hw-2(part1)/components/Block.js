@@ -21,16 +21,16 @@ let Block=React.createClass({
         
     },
     calc: function(){
-        let linkStateArr=[...this.state.stateArr];
+        let linkStateArr=[...this.props.data];
         if (this.state.inputTextValue){
             linkStateArr=linkStateArr.filter((elem)=>{return elem.includes(this.state.inputTextValue);});
         }
         if (this.state.check){
             linkStateArr.sort();
         }
-        if(!this.state.check && !this.state.inputTextValue){
-            linkStateArr=this.props.data;
-        };
+        // if(!this.state.check && !this.state.inputTextValue){
+        //     linkStateArr=this.props.data;
+        // };
         this.setState({stateArr:linkStateArr});
         
     },
