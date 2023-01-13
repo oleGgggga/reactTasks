@@ -21,7 +21,7 @@ class Item extends React.Component{
         return(
             <div className="itemWraper" data-itemid={this.props.id} onClick={this.itemClicked}>
             <p className="itemTitle">{this.props.title}</p>
-            <img src={this.props.image} alt="#"></img>
+            <img src={(this.props.img).default} alt="#"></img>
             <p>{this.props.price}</p>
             <button className="editBtn">edit</button>
             <button className="deletBtn">delete</button>
