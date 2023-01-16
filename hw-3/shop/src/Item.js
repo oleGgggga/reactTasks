@@ -8,11 +8,11 @@ class Item extends React.Component{
     };
     itemClicked=(eo)=>{
         if (eo.target.closest('.editBtn')){
-            console.log(eo.currentTarget.dataset.itemid);
+            this.props.cbedit(eo.currentTarget.dataset.itemid)
             return;
         };
         if(eo.target.closest('.deletBtn')){
-            console.log(eo.currentTarget.dataset.itemid);
+            this.props.cbdel(eo.currentTarget.dataset.itemid)
             return;
         }
 
@@ -21,10 +21,10 @@ class Item extends React.Component{
         return(
             <div className="itemWraper" data-itemid={this.props.id} onClick={this.itemClicked}>
             <p className="itemTitle">{this.props.title}</p>
-            <img src={(this.props.img).default} alt="#"></img>
+            <img src={require('./img/1.jpg')} alt="#"></img>
             <p>{this.props.price}</p>
-            <button className="editBtn">edit</button>
-            <button className="deletBtn">delete</button>
+            <button disabled={this.props.modalId || this.props.addModal? "disabled" :""} className="editBtn">edit</button>
+            <button disabled={this.props.modalId || this.props.addModal? "disabled" :""} className="deletBtn">delete</button>
             </div>
         )
     }
