@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes, { number } from 'prop-types';
 import {btnEvents} from './events';
 export class EditRow extends React.PureComponent{
@@ -24,7 +24,6 @@ export class EditRow extends React.PureComponent{
     editValueSave=()=>{
         const newObj={...this.state.data, isActive:JSON.parse(this.selectRef.current.value), balance:+this.balanceRef.current.value, FIO:{name:this.nameRef.current.value, surname:this.surnameRef.current.value, fatherName:this.fatherNameRef.current.value}};
         delete newObj["isEdit"];
-        console.log(newObj);
         btnEvents.emit('savedEditObj', newObj);
     }
     render(){
@@ -37,8 +36,8 @@ export class EditRow extends React.PureComponent{
                 <td><input type='number' defaultValue={this.state.data.balance} ref={this.balanceRef}/></td>
                 <td>
                 <select ref={this.selectRef}>
-                 <option value={true}>активный</option>
-                 <option value={false}>заблокирован</option>    
+                    <option value={true}>активный</option> 
+                    <option value={false}>заблокирован</option>
                 </select>
                 </td>
                 <td><button onClick={this.editValueSave}>сохранить</button></td>

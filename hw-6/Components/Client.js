@@ -31,7 +31,7 @@ export class ClientRow extends React.PureComponent{
                 <td><button disabled={!!this.props.data.isDisable?"disabled" :""} onClick={this.edit}>редактировать</button></td>
                 <td><button disabled={!!this.props.data.isDisable?"disabled" :""} onClick={this.del}>удалить</button></td>
             </tr>:
-            <EditRow data={this.props.data}/>
+            <EditRow data={this.props.data} />
                 
         )
     }

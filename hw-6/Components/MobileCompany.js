@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import PropTypes, { element } from 'prop-types';
 import { ClientRow } from "./Client";
 import {btnEvents} from './events';
-import { Filtred } from "./Filtred";
 import { Form } from "./AddForm";
 import '../index.css';
 export class MobileCompany extends React.PureComponent{
@@ -18,7 +17,7 @@ export class MobileCompany extends React.PureComponent{
     };
     state={
       data: this.props.data,
-      filtredData: null,
+      filtredData: this.props.data,
       showActiveList: false, 
       showBlockedList: false,
       showAddForm: false,
@@ -42,26 +41,32 @@ export class MobileCompany extends React.PureComponent{
       const findElem=this.state.data.find(elem=>elem.id===id);
       const editElem={...findElem};
       delete editElem['isEdit'];
-      const newArr=this.state.data.map((elem)=>elem.id!==id?elem:editElem);
-      this.setState({data:newArr,}); 
+      const newArr=this.state.filtredData.map((elem)=>elem.id!==id?elem:editElem);
+      const newArrData=this.state.data.map((elem)=>elem.id!==id?elem:editElem);
+      this.setState({data:newArrData, filtredData: newArr,}); 
     }
     saveEditClient=(obj)=>{
       delete obj['isEdit'];
-      const newArr=this.state.data.map((elem)=>elem.id!==obj.id?elem:obj);
-      this.setState({data:newArr,});
+      const newArr=this.state.filtredData.map((elem)=>elem.id!==obj.id?elem:obj);
+      const newArrData=this.state.data.map((elem)=>elem.id!==obj.id?elem:obj);
+      this.setState({data:newArrData, filtredData: newArr,});
     }
     editClient=(id)=>{
       const findElem=this.state.data.find(elem=>elem.id===id);
       const editElem={...findElem};
       editElem.isEdit=true;
-      const newArr=this.state.data.map((elem)=>elem.id!==id?elem:editElem);
-      this.setState({data:newArr,}); 
+      const newArr=this.state.filtredData.map((elem)=>elem.id!==id?elem:editElem);
+      const newArrData=this.state.data.map((elem)=>elem.id!==id?elem:editElem);
+      this.setState({data:newArrData, filtredData: newArr,}); 
     }
     delClient=(id)=>{
-      const newArr=this.state.data.filter((elem)=>{
+      const newArr=this.state.filtredData.filter((elem)=>{
         return elem.id !==id;
       });
-      this.setState({data: newArr,});
+      const newArrData=this.state.data.filter((elem)=>{
+        return elem.id !==id;
+      });
+      this.setState({data: newArrData, filtredData: newArr,});
     }
     filterFnc=(eo)=>{
       switch(eo.target.name){
@@ -76,7 +81,7 @@ export class MobileCompany extends React.PureComponent{
         this.setState({filtredData: blockedArr, showActiveList: false, showBlockedList: true,});
         break;
         default:
-        this.setState({filtredData: null, showActiveList: false, showBlockedList: false,});
+        this.setState({filtredData: this.state.data, showActiveList: false, showBlockedList: false,});
         break;
       }
     }
@@ -98,9 +103,7 @@ export class MobileCompany extends React.PureComponent{
             <button className="navBtn" name="blocked" onClick={this.filterFnc}>список заблокированных</button>
           </div>
           <table className="usersTable">
-            {!this.state.showActiveList && !this.state.showBlockedList?
-             (<Fragment>
-              <thead className="tableHeader">
+            <thead className="tableHeader">
               <tr>
               <th>фамилия</th>
               <th>имя</th>
@@ -113,14 +116,11 @@ export class MobileCompany extends React.PureComponent{
             </thead>
             <tbody>
               {
-                this.state.data.map(elem=><ClientRow key={elem.id} data={elem}/>)
+                this.state.filtredData.map(elem=><ClientRow key={elem.id} data={elem}/>)
               }
             </tbody>
-            </Fragment>):
-            (<Filtred data={this.state.filtredData}/>)
-            }
-          </table>
-            <div className={'addBtn'+' '+`${this.state.showActiveList || this.state.showBlockedList?'hideAddBtn':''}`} onClick={this.handleAddClick}>{this.state.showAddForm?'отмена':'добавте нового пользователя'}</div>
+            </table>
+            <div className={'addBtn'+' '+`${this.state.showActiveList || this.state.showBlockedList?'hideAddBtn':''}`} onClick={this.handleAddClick}>{this.state.showAddForm?'отмена':'добавьте нового пользователя'}</div>
             {this.state.showAddForm?<Form/>:null}
         </div>
       )
