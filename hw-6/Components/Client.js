@@ -28,8 +28,8 @@ export class ClientRow extends React.PureComponent{
                 <td>{this.props.data.FIO.fatherName}</td>
                 <td>{this.props.data.balance}</td>
                 <td>{this.props.data.isActive?'активный':'заблокирован'}</td>
-                <td><button disabled={!!this.props.data.isDisable?"disabled" :""} onClick={this.edit}>редактировать</button></td>
-                <td><button disabled={!!this.props.data.isDisable?"disabled" :""} onClick={this.del}>удалить</button></td>
+                <td><button onClick={this.edit}>редактировать</button></td>
+                <td><button onClick={this.del}>удалить</button></td>
             </tr>:
             <EditRow data={this.props.data}/>
                 
